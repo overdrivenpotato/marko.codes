@@ -1,0 +1,18 @@
+language: node_js
+
+install:
+- npm install
+
+script:
+- webpack
+
+after_success: |
+  [ $TRAVIS_BRANCH = master ] &&
+  [ $TRAVIS_PULL_REQUEST = false ] &&
+  sudo pip install ghp-import &&
+  ghp-import -n -m 'Build site' dist &&
+  git push -fq https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git gh-pages
+
+env:
+  global:
+    secure: hR3C2DCXmCe81TOG6oS25iTP0ZNqiZLjpmCxUdq/hKbCMLqFo7UQ0zTThzjwv6HjBxHMuLyqxIV8wdFevUv1VF2zEgIfK9Gdx1xmFJrjTsR3wOEV9JK0ZtznUJuTc1pOuHVrwwATNpJ4Mz0tfNUF3M4uXMIZBh8Udp6Qsk6ZymnG97wYerxaw3z/6eYwfbcVCiKwrfMj+0vqNOA5emCrVu3nBNhr7Z+xgy9vkgeQNYvjT+lyxKUeLuXnuvgljCNseOQG51Gm6O5JeBvGd6rHyYov//+Ut52zdh6fWfJuVOWGH5Dfer4+iPFKxL8kADNcxqqSmepwy9sl97V/VIZ1SEQ5y52zZH0Hennl0mOdD7wrlz+nMgQQSsoR3np07joBV/kCzRBV9LlWesZdWyuAJ/z2zC6v7fD47CUnOWIjsjsHMQ2f48JDci+b0kULR0DjIrweIHmU1r/yzsI1d52Su+YO9D3bt+iTHqVkfO8i6cKD+NmdhYNUaboCwpTArQKr8IO+X2/N/zzhkXGp8J/SKHJLEfoDY9pct5bHvf1zM+mIBN79CINPmFyLNhF6zghRcPbCuiDMJfSB9Y9wNit8b+3Jpnacen0ZXfieoyScfm9JR+5iiGpex02AQtIL18GzIabIq73aTlvcv1nrKgjq1O3d3ZKicCAl9Ba5XNL+BRM=
