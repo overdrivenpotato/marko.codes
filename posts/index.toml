@@ -4,3 +4,6 @@ title = 'This is a Test Post'
 
 [2016-08-01_testpost2]
 title = 'Second post'
+
+[2016-08-02_markdowntest]
+title = 'New markdown elements'
