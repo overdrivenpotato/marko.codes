@@ -14,12 +14,11 @@ const b = block('front-page')
 class FrontPage extends React.Component {
     view: React.DOM.div
     content: React.DOM.div
-    header: Header
     handleResize: () => void
 
     constructor() {
         super()
-        this.handleResize = () => this.header.forceUpdate()
+        this.handleResize = () => this.forceUpdate()
     }
 
     componentDidMount(): void {
@@ -31,7 +30,7 @@ class FrontPage extends React.Component {
     }
 
     scroll(): void {
-        scrollDiv(this.view, this.content.offsetTop, 1.0, () => this.header.forceUpdate())
+        scrollDiv(this.view, this.content.offsetTop, 1.0, this.handleResize)
     }
 
     headerVisibility(): number {
@@ -42,9 +41,9 @@ class FrontPage extends React.Component {
 
     render() {
         return <div className={b}>
-            <Header visibility={this.headerVisibility()} ref={ref => this.header = ref} />
+            <Header visibility={this.headerVisibility()} />
             <div className={b('perspective')}
-                 onScroll={() => this.forceUpdate()}
+                 onScroll={this.handleResize}
                  ref={ref => this.view = ref}>
                 <Splash scroll={this.scroll.bind(this)} />
                 <div className={b('content')} ref={ref => this.content = ref}>

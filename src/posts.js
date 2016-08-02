@@ -22,7 +22,6 @@ export class Post {
     }
 
     key(): string {
-        console.log(this.date.format())
         return this.date.format() + this.tag
     }
 }
