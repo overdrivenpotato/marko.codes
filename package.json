@@ -22,6 +22,7 @@
     "i": "^0.3.5",
     "iflow-moment": "^1.1.13",
     "json-loader": "^0.5.4",
+    "loader-utils": "^0.2.15",
     "moment": "^2.14.1",
     "nib": "^1.1.0",
     "normalize-styl": "^3.0.3",
