@@ -1,0 +1,86 @@
+@import './variables'
+
+.splash
+    position relative
+    transform-style preserve-3d
+    z-index -1
+
+    height 'calc(100% - %s)' % page-visibility
+    min-height splash-min-height
+
+    // Center content
+    display flex
+    justify-content center
+    align-items center
+
+    // Text
+    color white
+    font-family 'Open Sans', sans-serif
+
+    &__background-wrapper
+        position absolute
+        top 0
+        left 0
+        right 0
+        bottom 0
+
+        transform translateZ(-1px) scale(2)
+
+    &__background
+        height 100%
+
+        background-image url('~assets/bg.jpg')
+        background-size cover
+        background-position 50%
+
+        animation background 1.5s $ease-out-sine
+
+    &__gradient
+        // overlay the splash
+        width 100%
+        height 100%
+        position absolute
+        top 0
+        left 0
+        z-index -1
+
+        background-image linear-gradient(0deg, rgba(0,0,0,0.5), transparent 75%)
+
+    &__arrow
+        position absolute
+        bottom arrow-offset
+        left 50%
+
+        animation arrow 2s $ease-out-sine
+
+        size = 40px
+
+        content ""
+        cursor pointer
+        display inline-block
+        height size
+        width size
+        margin-left -(size / 2)
+        background-image url('~assets/arrow.svg')
+        background-size 50%
+        background-position 50%
+        background-repeat no-repeat
+
+@keyframes background
+    0%
+        opacity 0
+        transform scale(a-bg-start)
+
+    100%
+        opacity 1
+        transform scale(1)
+
+@keyframes arrow
+    0%
+        opacity 0
+
+    70%
+        opacity 0
+
+    100%
+        opacity 1

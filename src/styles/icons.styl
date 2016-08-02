@@ -1,0 +1,43 @@
+icon-anim(index)
+    animation ('icon-%s' % index) 1.75s
+
+    @keyframes icon-{index}
+        0%
+            opacity 0
+
+        {50% + (index - 1) * 10%}
+            opacity 0
+            transform translate3d(0, a-icon-offset, 0)
+
+        100%
+            opacity 1
+            transform translate3d(0, 0, 0)
+
+
+.icons
+    display flex
+    width 132px
+    padding-left 3px
+    justify-content space-between
+
+    &__icon
+        position relative
+        transition transform 0.2s ease
+        transform translate3d(0, 0, 0)
+
+        &:hover
+            transform translate3d(0, -2px, 0)
+
+        width 29px
+        height 29px
+
+        &--link_blog
+            width 25px
+            icon-anim(1)
+
+        &--link_mail
+            icon-anim(2)
+
+        &--link_opensource
+            width 28px
+            icon-anim(3)

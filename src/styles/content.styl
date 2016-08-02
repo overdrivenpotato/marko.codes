@@ -1,0 +1,25 @@
+.content
+    threshold = 600px
+
+    padding 50px 0
+
+    +max-screen(threshold)
+        padding 37px 0
+
+    display flex
+    flex-direction column
+    align-items center
+    justify-content center
+    background-color white
+
+    &__post
+        max-width 700px
+
+        margin 30px 60px
+
+        +max-screen(threshold)
+            margin 30px 40px
+
+        background-color white
+
+        @import './post'
