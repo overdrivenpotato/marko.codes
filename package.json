@@ -20,7 +20,6 @@
     "flow-bin": "^0.30.0",
     "html-webpack-plugin": "^2.22.0",
     "i": "^0.3.5",
-    "iflow-moment": "^1.1.13",
     "json-loader": "^0.5.4",
     "loader-utils": "^0.2.15",
     "moment": "^2.14.1",
@@ -45,6 +44,6 @@
   "scripts": {
     "build": "NODE_ENV=production webpack",
     "build:watch": "webpack -w",
-    "flow": "flow --color always; [[ $? -eq 0 || $? -eq 2 ]]"
+    "flow": "flow --color always; [ $? -eq 0 -o $? -eq 2 ]"
   }
 }
