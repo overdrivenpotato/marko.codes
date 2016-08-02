@@ -1,8 +1,10 @@
+// @flow
+
 import React from 'react'
 import ReactMarkdown from 'react-markdown'
 import block from 'bem-cn'
 
-import posts from '../posts'
+import posts, { Post } from '../posts'
 
 const b = block('content')
 
