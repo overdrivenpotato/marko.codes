@@ -1,3 +1,4 @@
+import webpack from 'webpack'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import CopyWebpackPlugin from 'copy-webpack-plugin'
@@ -32,6 +33,10 @@ export default {
             dev: false,
             onBuildEnd: 'npm run flow',
         }),
+        new webpack.EnvironmentPlugin(['NODE_ENV']),
+        process.env.NODE_ENV === 'production'
+            ? new webpack.optimize.UglifyJsPlugin()
+            : undefined,
     ],
     module: {
         loaders: [
