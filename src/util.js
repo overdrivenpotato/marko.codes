@@ -18,8 +18,7 @@ const unbindEvent = (view: React.DOM.div, f: () => void): void => {
 export const scrollDiv = (
     view: React.DOM.div,
     target: number,
-    duration: number,
-    update: () => void
+    duration: number
 ): void => {
     const startTime = new Date().getTime()
     const startOffset = view.scrollTop
@@ -36,12 +35,15 @@ export const scrollDiv = (
             view.scrollTop = target
             unbindEvent(view, scroller)
         } else {
-            view.scrollTop = easeOutQuint(progress) * (target - startOffset) + startOffset
             window.requestAnimationFrame(anim)
+            view.scrollTop = easeOutQuint(progress) * (target - startOffset) + startOffset
         }
-        update()
     }
 
     bindEvent(view, scroller)
     anim()
 }
+
+export const clamp = (n: number, min: number, max: number): number => (
+    Math.min(Math.max(n, min), max)
+)

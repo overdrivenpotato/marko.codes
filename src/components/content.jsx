@@ -16,10 +16,16 @@ const renderPost = (post: Post) => (
     </div>
 )
 
-const Content = () => (
-    <div className={b}>
-        { posts.map(renderPost) }
-    </div>
-)
+class Content extends React.Component {
+    shouldComponentUpdate() {
+        return false
+    }
+
+    render() {
+        return <div className={b}>
+            { posts.map(renderPost) }
+        </div>
+    }
+}
 
 export default Content

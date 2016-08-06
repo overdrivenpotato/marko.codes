@@ -7,45 +7,56 @@ import { easeOutQuint } from 'easing-utils'
 import Splash from './splash'
 import Content from './content'
 import Header from './header'
-import { scrollDiv } from '../util'
+import { scrollDiv, clamp } from '../util'
 
 const b = block('front-page')
 
 class FrontPage extends React.Component {
     view: React.DOM.div
     content: React.DOM.div
-    handleResize: () => void
+
+    state: {
+        opacity: number,
+    }
 
     constructor() {
         super()
-        this.handleResize = () => this.forceUpdate()
+
+        this.state = {
+            opacity: 0,
+        }
+    }
+
+    handleScroll(): void {
+        this.setState({opacity: this.headerVisibility()})
     }
 
     componentDidMount(): void {
-        window.addEventListener('resize', this.handleResize)
+        window.addEventListener('resize', this.handleScroll)
     }
 
     componentWillUnmount(): void {
-        window.removeEventListener('resize', this.handleResize)
+        window.removeEventListener('resize', this.handleScroll)
     }
 
-    scroll(): void {
-        scrollDiv(this.view, this.content.offsetTop, 1.0, this.handleResize)
+    animateScroll(): void {
+        scrollDiv(this.view, this.content.offsetTop, 1.0)
     }
 
     headerVisibility(): number {
         if(!this.view) return 0
 
-        return this.view.scrollTop / this.view.offsetHeight
+        const progress = this.view.scrollTop / this.view.offsetHeight
+        return clamp(progress * 2.2 - 1.0, 0, 1)
     }
 
     render() {
         return <div className={b}>
-            <Header visibility={this.headerVisibility()} />
+            <Header opacity={this.state.opacity} />
             <div className={b('perspective')}
-                 onScroll={this.handleResize}
+                 onScroll={this.handleScroll.bind(this)}
                  ref={ref => this.view = ref}>
-                <Splash scroll={this.scroll.bind(this)} />
+                <Splash scroll={this.animateScroll.bind(this)} />
                 <div className={b('content')} ref={ref => this.content = ref}>
                     <Content />
                 </div>
